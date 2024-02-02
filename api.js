@@ -79,14 +79,14 @@ router.put('/books/:id', function (req, res) {
 
 router.delete('/books/:id', function (req, res) {
 	const id = req.params.id;
-	let bookToUpdate=booksDirectory.find(book=>book.isbn=== String(id))
-	if(!bookToUpdate)
+	let index=booksDirectory.findIndex(book=>book.isbn=== String(id))
+	if(index === -1)
 	{
 	res.status(404);
 	}
     else
 	{
-		booksDirectory=booksDirectory.filter(book=>book.isbn !==id)
+		booksDirectory.splice(index , 1);
 	
 	res.send('Deleted the book')
 	}
